@@ -1,0 +1,11 @@
+dados/brutos/*
+!dados/brutos/.gitkeep
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+desktop.ini
+dados/processados/*
+!dados/processados/.gitkeep
