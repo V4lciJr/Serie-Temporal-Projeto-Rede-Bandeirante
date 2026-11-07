@@ -16,6 +16,8 @@
 | 12 | 5 | Avaliação por backtest com origem móvel: 12 origens, passo de 14 dias, 28 dias de teste cada | WMAPE médio: Holt-Winters 15,36; SARIMAX 15,50; naive 16,15; SARIMA 17,51; média 4 semanas 22,05%. Sem a pior origem (origem 1, pós-promoção de abril/2019): SARIMAX 11,80; Holt-Winters 12,82% |
 | 13 | 5 | Nível de serviço 93,75% (Cu / (Cu + Co)) e estoque de segurança pelo quantil empírico dos erros do backtest, sem supor erro normal | Cu R$ 0,7761 e Co R$ 0,0517 no preço médio de R$ 2,59; erros com cauda pesada (pior origem muito acima das demais) |
 | 14 | 5 | Critério 3: só o SARIMAX + promoção reduz o custo em R$ contra o processo atual | Custo por período: SARIMAX R$ 107,99; média 4 semanas R$ 147,11; Holt-Winters R$ 160,15. SARIMAX: −26,6%, estoque de segurança 786 un contra 2.112, economia de R$ 508,57/ano no P0131 |
+| 15 | 6 | Pedido em conta aberta: demanda prevista + estoque de segurança − estoque no CD = pedido; estoque do CD informado na execução (3.000 un no cenário de teste) | Requisito do comprador: entender de onde sai o número. Cenário 6.1: previsão 8.238 un contra 8.158 vendidas (+0,98%); pedido de 6.024 un |
+| 16 | 6 | Deploy como script `sugerir_pedido.py` que retreina o SARIMAX e recalcula o estoque de segurança a cada execução, só com janelas encerradas até a data da decisão | O SARIMAX depende do histórico recente; um modelo estático envelhece |
 
 ## Fechamento da Fase 2 — achados e decisões
 
@@ -34,3 +36,4 @@
 - `pct_lojas_promo` registra a promoção realizada, não o calendário planejado que estará disponível em produção.
 - O estoque de segurança da simulação foi calculado com os mesmos 12 erros em que é avaliado (resultado levemente otimista para todos os modelos).
 - As janelas do backtest se sobrepõem (28 dias com passo de 14): as 12 origens não são independentes.
+- Estoque de segurança instável com 12 origens: na decisão simulada em 03/10/2019 (origens de 04/04 a 05/09) ele é 1.603 un; com as origens da Fase 5 (02/05 a 03/10) é 786 un. A diferença é a janela da promoção de abril/2019.

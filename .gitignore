@@ -9,3 +9,6 @@ venv/
 desktop.ini
 dados/processados/*
 !dados/processados/.gitkeep
+saidas/*
+!saidas/.gitkeep
+.pytest_cache/
