@@ -1,7 +1,6 @@
 import warnings
 
 import numpy as np
-import pandas as pd
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
